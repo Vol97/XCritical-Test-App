@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">XCriticalTestApp</string>
+    <string name="email">E-mail</string>
+    <string name="email_hint">Введите e-mail</string>
+    <string name="email_error">Неверный e-mail</string>
+    <string name="password">Пароль</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="password_error">Неверный пароль</string>
+    <string name="forgot_password"><u>Забыли пароль?</u></string>
+    <string name="button_login">Войти</string>
+    <string name="button_registration">Зарегистрироваться</string>
+    <string name="change_broker"><u>Сменить брокера</u></string>
+    <string name="button_send_recover_password_email">Восстановить пароль</string>
+    <string name="logo_description">XCritical logo</string>
+</resources>
