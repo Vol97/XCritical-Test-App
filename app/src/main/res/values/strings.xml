@@ -9,7 +9,6 @@
     <string name="forgot_password"><u>Забыли пароль?</u></string>
     <string name="button_login">Войти</string>
     <string name="button_registration">Зарегистрироваться</string>
-    <string name="change_broker"><u>Сменить брокера</u></string>
     <string name="button_send_recover_password_email">Восстановить пароль</string>
     <string name="logo_description">XCritical logo</string>
 </resources>
