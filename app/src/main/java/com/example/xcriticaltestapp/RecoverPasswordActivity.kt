@@ -21,7 +21,7 @@ class RecoverPasswordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recover_password)
 
         buttonRecoverPassword.setOnClickListener {
-            if(editTextEmailAddress.text.isEmpty()){
+            if(editTextEmailAddress.text.isNullOrEmpty()){
                 textViewEmailError.visibility = View.VISIBLE
             }
         }
@@ -30,15 +30,9 @@ class RecoverPasswordActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 textViewEmailError.visibility = View.INVISIBLE
             }
         })

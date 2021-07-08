@@ -24,16 +24,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         buttonLogin.setOnClickListener {
-            if(editTextEmailAddress.text.isEmpty()){
+            if(editTextEmailAddress.text.isNullOrEmpty()){
                 textViewEmailError.visibility = View.VISIBLE
             }
-            if(editTextPassword.text.isEmpty()){
+            if(editTextPassword.text.isNullOrEmpty()){
                 textViewPasswordError.visibility = View.VISIBLE
             }
         }
 
         textViewForgotPassword.setOnClickListener {
-
             val intent = Intent(this, RecoverPasswordActivity::class.java)
             startActivity(intent)
         }
@@ -42,15 +41,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 textViewEmailError.visibility = View.INVISIBLE
             }
         })
@@ -59,15 +52,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable) {}
 
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 textViewPasswordError.visibility = View.INVISIBLE
             }
         })
