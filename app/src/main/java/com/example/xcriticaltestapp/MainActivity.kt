@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,17 +13,51 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    val textViewEmailError by lazy { findViewById<TextView>(R.id.textViewEmailError) }
-    val textViewPasswordError by lazy { findViewById<TextView>(R.id.textViewPasswordError) }
-    val textViewForgotPassword by lazy { findViewById<TextView>(R.id.textViewForgotPassword) }
-    val editTextEmailAddress by lazy { findViewById<EditText>(R.id.editTextEmailAddress) }
-    val editTextPassword by lazy { findViewById<EditText>(R.id.editTextPassword) }
-    val buttonLogin by lazy { findViewById<Button>(R.id.buttonLogin) }
+    private val textViewEmailError: TextView by lazy { findViewById<TextView>(R.id.textViewEmailError) }
+    private val textViewPasswordError by lazy { findViewById<TextView>(R.id.textViewPasswordError) }
+    private val textViewForgotPassword by lazy { findViewById<TextView>(R.id.textViewForgotPassword) }
+    private val editTextEmailAddress by lazy { findViewById<EditText>(R.id.editTextEmailAddress) }
+    private val editTextPassword by lazy { findViewById<EditText>(R.id.editTextPassword) }
+    private val buttonLogin by lazy { findViewById<Button>(R.id.buttonLogin) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initializeListeners()
+        Log.d("LifecycleTest", "onCreate")
+    }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d("LifecycleTest", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("LifecycleTest", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("LifecycleTest", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("LifecycleTest", "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("LifecycleTest", "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("LifecycleTest", "onDestroy")
+    }
+
+    private fun initializeListeners() {
         buttonLogin.setOnClickListener {
             if(editTextEmailAddress.text.isNullOrEmpty()){
                 textViewEmailError.visibility = View.VISIBLE
