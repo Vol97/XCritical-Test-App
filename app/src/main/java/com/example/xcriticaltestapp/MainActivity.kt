@@ -10,6 +10,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
@@ -20,14 +22,13 @@ class MainActivity : AppCompatActivity() {
     private val editTextEmailAddress by lazy { findViewById<EditText>(R.id.editTextEmailAddress) }
     private val editTextPassword by lazy { findViewById<EditText>(R.id.editTextPassword) }
     private val buttonLogin by lazy { findViewById<Button>(R.id.buttonLogin) }
-    private val EMAIL_ADDRESS_PATTERN = Pattern.compile(
-        "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
-    )
-
+    private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel = ViewModelProvider(this, MainViewModelFactory(application, editTextEmailAddress.text.toString()))
+            .get(MainViewModel::class.java)
         initializeListeners()
         Log.d("LifecycleTest", "onCreate")
     }
@@ -64,9 +65,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeListeners() {
         buttonLogin.setOnClickListener {
-            if(editTextEmailAddress.text.isNullOrEmpty() || !validateEmail(editTextEmailAddress.text.toString())){
-                textViewEmailError.visibility = View.VISIBLE
-            }
+            viewModel.isInvalidLiveData.observe(this, Observer{
+                if(it) {
+                    textViewEmailError.visibility = View.VISIBLE
+                }
+            })
             if(editTextPassword.text.isNullOrEmpty()){
                 textViewPasswordError.visibility = View.VISIBLE
             }
@@ -99,6 +102,4 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun validateEmail(email: String) = EMAIL_ADDRESS_PATTERN.matcher(email).matches()
 }
