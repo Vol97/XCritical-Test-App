@@ -75,8 +75,8 @@ class MainActivity : AppCompatActivity() {
             })
 
             if(!textViewEmailError.isVisible && !textViewPasswordError.isVisible){
-                val intent = Intent(this, MainTeleprompterActivity::class.java)
-                startActivity(intent)
+                val intentMainTeleprompterActivity = Intent(this, MainTeleprompterActivity::class.java)
+                startActivity(intentMainTeleprompterActivity)
             }
         }
 
