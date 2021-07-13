@@ -13,4 +13,5 @@
     <color name="red_400">#FF2A50</color>
     <color name="button_indigo_300">#687BDD</color>
     <color name="background_black_900">#04050E</color>
+    <color name="app_indigo_900">#0D0D31</color>
 </resources>

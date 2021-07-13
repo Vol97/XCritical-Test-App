@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
@@ -72,6 +73,11 @@ class MainActivity : AppCompatActivity() {
                     textViewPasswordError.visibility = View.VISIBLE
                 }
             })
+
+            if(!textViewEmailError.isVisible && !textViewPasswordError.isVisible){
+                val intent = Intent(this, MainTeleprompterActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         textViewForgotPassword.setOnClickListener {
