@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/createProjectFragment"
+        android:name="com.example.xcriticaltestapp.CreateProjectFragment"
+        android:label="fragment_create_project"
+        tools:layout="@layout/fragment_create_project" />
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.example.xcriticaltestapp.GalleryFragment"
+        android:label="fragment_gallery"
+        tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.example.xcriticaltestapp.ProjectsFragment"
+        android:label="fragment_projects"
+        tools:layout="@layout/fragment_projects" />
+</navigation>

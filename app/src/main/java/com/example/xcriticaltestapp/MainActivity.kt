@@ -10,13 +10,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
 
-    private val textViewEmailError: TextView by lazy { findViewById<TextView>(R.id.textViewEmailError) }
+    private val textViewEmailError by lazy { findViewById<TextView>(R.id.textViewEmailError) }
     private val textViewPasswordError by lazy { findViewById<TextView>(R.id.textViewPasswordError) }
     private val textViewForgotPassword by lazy { findViewById<TextView>(R.id.textViewForgotPassword) }
     private val editTextEmailAddress by lazy { findViewById<EditText>(R.id.editTextEmailAddress) }
@@ -27,8 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProvider(this, MainViewModelFactory(application, editTextEmailAddress.text.toString()))
-            .get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initializeListeners()
         Log.d("LifecycleTest", "onCreate")
     }
@@ -65,14 +62,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun initializeListeners() {
         buttonLogin.setOnClickListener {
-            viewModel.isInvalidLiveData.observe(this, Observer{
+            viewModel.validateEmail(editTextEmailAddress.text.toString()).observe(this, {
                 if(it) {
                     textViewEmailError.visibility = View.VISIBLE
                 }
             })
-            if(editTextPassword.text.isNullOrEmpty()){
-                textViewPasswordError.visibility = View.VISIBLE
-            }
+            viewModel.validatePassword(editTextPassword.text.toString()).observe(this, {
+                if(it) {
+                    textViewPasswordError.visibility = View.VISIBLE
+                }
+            })
         }
 
         textViewForgotPassword.setOnClickListener {
