@@ -6,22 +6,19 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import java.util.regex.Pattern
+import com.example.xcriticaltestapp.databinding.ActivityRecoverPasswordBinding
 
 class RecoverPasswordActivity : AppCompatActivity() {
 
-    private val textViewEmailError by lazy { findViewById<TextView>(R.id.textViewEmailError) }
-    private val editTextEmailAddress by lazy { findViewById<EditText>(R.id.editTextEmailAddress) }
-    private val buttonRecoverPassword by lazy { findViewById<Button>(R.id.buttonRecoverPassword) }
+    private lateinit var binding : ActivityRecoverPasswordBinding
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recover_password)
+        binding = ActivityRecoverPasswordBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initializeListeners()
         Log.d("LifecycleTest", "onCreate_RecoverPasswordActivity")
@@ -58,22 +55,22 @@ class RecoverPasswordActivity : AppCompatActivity() {
     }
 
     private fun initializeListeners() {
-        buttonRecoverPassword.setOnClickListener {
-            viewModel.validateEmail(editTextEmailAddress.text.toString()).observe(this, {
+        binding.buttonRecoverPassword.setOnClickListener {
+            viewModel.validateEmail(binding.editTextEmailAddress.text.toString()).observe(this, {
                 if(it) {
-                    textViewEmailError.visibility = View.VISIBLE
+                    binding.textViewEmailError.visibility = View.VISIBLE
                 }
             })
         }
 
-        editTextEmailAddress.addTextChangedListener(object : TextWatcher {
+        binding.editTextEmailAddress.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                textViewEmailError.visibility = View.INVISIBLE
+                binding.textViewEmailError.visibility = View.INVISIBLE
             }
         })
     }

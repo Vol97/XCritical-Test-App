@@ -7,25 +7,20 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.example.xcriticaltestapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private val textViewEmailError by lazy { findViewById<TextView>(R.id.textViewEmailError) }
-    private val textViewPasswordError by lazy { findViewById<TextView>(R.id.textViewPasswordError) }
-    private val textViewForgotPassword by lazy { findViewById<TextView>(R.id.textViewForgotPassword) }
-    private val editTextEmailAddress by lazy { findViewById<EditText>(R.id.editTextEmailAddress) }
-    private val editTextPassword by lazy { findViewById<EditText>(R.id.editTextPassword) }
-    private val buttonLogin by lazy { findViewById<Button>(R.id.buttonLogin) }
+    private lateinit var binding : ActivityMainBinding
     private lateinit var viewModel : MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initializeListeners()
         Log.d("LifecycleTest", "onCreate")
@@ -62,48 +57,48 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeListeners() {
-        buttonLogin.setOnClickListener {
-            viewModel.validateEmail(editTextEmailAddress.text.toString()).observe(this, {
+        binding.buttonLogin.setOnClickListener {
+            viewModel.validateEmail(binding.editTextEmailAddress.text.toString()).observe(this, {
                 if(it) {
-                    textViewEmailError.visibility = View.VISIBLE
+                    binding.textViewEmailError.visibility = View.VISIBLE
                 }
             })
-            viewModel.validatePassword(editTextPassword.text.toString()).observe(this, {
+            viewModel.validatePassword(binding.editTextPassword.text.toString()).observe(this, {
                 if(it) {
-                    textViewPasswordError.visibility = View.VISIBLE
+                    binding.textViewPasswordError.visibility = View.VISIBLE
                 }
             })
 
-            if(!textViewEmailError.isVisible && !textViewPasswordError.isVisible){
+            if(!binding.textViewEmailError.isVisible && !binding.textViewPasswordError.isVisible){
                 val intentMainTeleprompterActivity = Intent(this, MainTeleprompterActivity::class.java)
                 startActivity(intentMainTeleprompterActivity)
             }
         }
 
-        textViewForgotPassword.setOnClickListener {
+        binding.textViewForgotPassword.setOnClickListener {
             val intent = Intent(this, RecoverPasswordActivity::class.java)
             startActivity(intent)
         }
 
-        editTextEmailAddress.addTextChangedListener(object : TextWatcher {
+        binding.editTextEmailAddress.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                textViewEmailError.visibility = View.INVISIBLE
+                binding.textViewEmailError.visibility = View.INVISIBLE
             }
         })
 
-        editTextPassword.addTextChangedListener(object : TextWatcher {
+        binding.editTextPassword.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                textViewPasswordError.visibility = View.INVISIBLE
+                binding.textViewPasswordError.visibility = View.INVISIBLE
             }
         })
     }

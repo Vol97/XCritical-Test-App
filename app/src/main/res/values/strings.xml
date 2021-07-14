@@ -11,4 +11,6 @@
     <string name="button_registration">Зарегистрироваться</string>
     <string name="button_send_recover_password_email">Восстановить пароль</string>
     <string name="logo_description">XCritical logo</string>
+    <string name="bottom_menu_projects">Проекты</string>
+    <string name="bottom_menu_gallery">Галерея</string>
 </resources>

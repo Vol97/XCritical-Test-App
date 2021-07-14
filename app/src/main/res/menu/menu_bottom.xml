@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/projectsFragment"
-        android:title="Проекты"
+        android:title="@string/bottom_menu_projects"
         android:icon="@drawable/ic_folder"
         android:iconTint="@color/white"/>
     <item
         android:id="@+id/galleryFragment"
-        android:title="Галерея"
+        android:title="@string/bottom_menu_gallery"
         android:icon="@drawable/ic_gallery"
         android:iconTint="@color/white"/>
 </menu>
