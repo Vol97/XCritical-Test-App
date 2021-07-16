@@ -22,23 +22,15 @@ class RecoverPasswordActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.mainViewModel = viewModel
-        initializeListeners()
 
         viewModel.isInvalidLiveDataEmail.observe(this, {
             if(it) {
                 binding.textViewEmailError.visibility = View.VISIBLE
             }
         })
-    }
 
-    private fun initializeListeners() {
-        binding.editTextEmailAddress.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        viewModel.isChangingEmailText.observe(this, {
+            if(it){
                 binding.textViewEmailError.visibility = View.INVISIBLE
             }
         })

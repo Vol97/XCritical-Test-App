@@ -23,8 +23,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isPassedValidation: LiveData<Boolean>
         get() = _isPassedValidation
 
+    private val _isChangingEmailText = MutableLiveData<Boolean>()
+    val isChangingEmailText: LiveData<Boolean>
+        get() = _isChangingEmailText
 
+    private val _isChangingPasswordText = MutableLiveData<Boolean>()
+    val isChangingPasswordText: LiveData<Boolean>
+        get() = _isChangingPasswordText
 
+    fun onEmailTextChanged(s: CharSequence,start: Int,before : Int, count :Int){
+        _isChangingEmailText.value = true
+    }
+
+    fun onPasswordTextChanged(s: CharSequence,start: Int,before : Int, count :Int){
+        _isChangingPasswordText.value = true
+    }
 
     /**
      * General validation of [email] and [password] for login

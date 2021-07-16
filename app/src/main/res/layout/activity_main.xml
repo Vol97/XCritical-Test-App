@@ -77,7 +77,8 @@
                     android:singleLine="false"
                     android:textColor="@color/grey_300"
                     android:textColorHint="@color/deep_purple_400"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:onTextChanged="@{mainViewModel.onEmailTextChanged}"/>
 
                 <TextView
                     android:id="@+id/textViewEmailError"
@@ -118,7 +119,8 @@
                     android:inputType="textPassword"
                     android:textColor="@color/grey_300"
                     android:textColorHint="@color/deep_purple_400"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:onTextChanged="@{mainViewModel.onPasswordTextChanged}" />
 
                 <TextView
                     android:id="@+id/textViewPasswordError"
