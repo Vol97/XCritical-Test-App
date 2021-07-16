@@ -21,85 +21,44 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        initializeListeners()
-        Log.d("LifecycleTest", "onCreate")
-    }
+        binding.mainViewModel = viewModel
 
-    override fun onStart() {
-        super.onStart()
-        Log.d("LifecycleTest", "onStart")
-    }
+        viewModel.isInvalidLiveDataEmail.observe(this, {
+            if(it) {
+                binding.textViewEmailError.visibility = View.VISIBLE
+            }
+        })
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("LifecycleTest", "onResume")
-    }
+        viewModel.isInvalidLiveDataPassword.observe(this, {
+            if(it) {
+                binding.textViewPasswordError.visibility = View.VISIBLE
+            }
+        })
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("LifecycleTest", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("LifecycleTest", "onStop")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d("LifecycleTest", "onRestart")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("LifecycleTest", "onDestroy")
-    }
-
-    private fun initializeListeners() {
-        binding.buttonLogin.setOnClickListener {
-            viewModel.validateEmail(binding.editTextEmailAddress.text.toString()).observe(this, {
-                if(it) {
-                    binding.textViewEmailError.visibility = View.VISIBLE
-                }
-            })
-            viewModel.validatePassword(binding.editTextPassword.text.toString()).observe(this, {
-                if(it) {
-                    binding.textViewPasswordError.visibility = View.VISIBLE
-                }
-            })
-
-            if(!binding.textViewEmailError.isVisible && !binding.textViewPasswordError.isVisible){
+        viewModel.isPassedValidation.observe(this, {
+            if(it) {
                 val intentMainTeleprompterActivity = Intent(this, MainTeleprompterActivity::class.java)
                 startActivity(intentMainTeleprompterActivity)
             }
-        }
+        })
+
+        viewModel.isChangingEmailText.observe(this, {
+            if(it){
+                binding.textViewEmailError.visibility = View.INVISIBLE
+            }
+        })
+
+        viewModel.isChangingPasswordText.observe(this, {
+            if(it){
+                binding.textViewPasswordError.visibility = View.INVISIBLE
+            }
+        })
 
         binding.textViewForgotPassword.setOnClickListener {
             val intent = Intent(this, RecoverPasswordActivity::class.java)
             startActivity(intent)
         }
-
-        binding.editTextEmailAddress.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                binding.textViewEmailError.visibility = View.INVISIBLE
-            }
-        })
-
-        binding.editTextPassword.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable) {}
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                binding.textViewPasswordError.visibility = View.INVISIBLE
-            }
-        })
     }
 }
