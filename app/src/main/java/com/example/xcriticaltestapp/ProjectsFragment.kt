@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcriticaltestapp.databinding.FragmentProjectsBinding
@@ -19,14 +20,14 @@ class ProjectsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentProjectsBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val testList = ArrayList<ProjectListItem>()
+
         testList.add(ProjectListItem(R.drawable.ic_mobile,"name1","text1"))
         testList.add(ProjectListItem(R.drawable.ic_mobile,"name2","text2"))
         testList.add(ProjectListItem(R.drawable.ic_mobile,"name3","text3"))
@@ -39,11 +40,22 @@ class ProjectsFragment : Fragment() {
         testList.add(ProjectListItem(R.drawable.ic_mobile,"name10","text10"))
         testList.add(ProjectListItem(R.drawable.ic_mobile,"name11","text11"))
 
+        val projectListAdapter = ProjectListAdapter(testList)
+
         binding.recyclerViewProjects.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = ProjectListAdapter(testList)
+            adapter = projectListAdapter
             setHasFixedSize(true)
         }
+
+        val swipeHandler = object : SwipeToDeleteCallback(context){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                projectListAdapter.deleteProjectItem(viewHolder.absoluteAdapterPosition)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerViewProjects)
     }
 
     override fun onDestroyView() {

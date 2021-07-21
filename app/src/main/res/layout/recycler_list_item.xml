@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -10,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/project_list_item_background"
         android:elevation="5dp"
-        android:layout_margin="5dp">
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/textViewProjectName"
@@ -43,7 +42,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewProjectText"
-            app:srcCompat="@drawable/ic_mobile" />
+            app:srcCompat="@drawable/ic_mobile"
+            android:contentDescription="@string/mobile_icon_description" />
 
         <TextView
             android:id="@+id/textViewProjectDate"
@@ -59,6 +59,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageViewMobileIcon"
             app:layout_constraintTop_toBottomOf="@+id/textViewProjectText" />
+
+        <ImageView
+            android:id="@+id/imageViewArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:contentDescription="@string/arrow_icon_description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

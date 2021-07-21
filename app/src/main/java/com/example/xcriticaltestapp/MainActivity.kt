@@ -3,11 +3,7 @@ package com.example.xcriticaltestapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.example.xcriticaltestapp.databinding.ActivityMainBinding
 

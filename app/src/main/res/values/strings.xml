@@ -13,4 +13,6 @@
     <string name="logo_description">XCritical logo</string>
     <string name="bottom_menu_projects">Проекты</string>
     <string name="bottom_menu_gallery">Галерея</string>
+    <string name="mobile_icon_description">Mobile icon, meaning the project is saved locally</string>
+    <string name="arrow_icon_description">Arrow icon, indicates that we can click on project item</string>
 </resources>
