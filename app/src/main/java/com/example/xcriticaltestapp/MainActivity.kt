@@ -9,8 +9,8 @@ import com.example.xcriticaltestapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
-    private lateinit var viewModel : MainViewModel
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,36 +18,39 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        supportActionBar?.hide()
+
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.mainViewModel = viewModel
 
         viewModel.isInvalidLiveDataEmail.observe(this, {
-            if(it) {
+            if (it) {
                 binding.textViewEmailError.visibility = View.VISIBLE
             }
         })
 
         viewModel.isInvalidLiveDataPassword.observe(this, {
-            if(it) {
+            if (it) {
                 binding.textViewPasswordError.visibility = View.VISIBLE
             }
         })
 
         viewModel.isPassedValidation.observe(this, {
-            if(it) {
-                val intentMainTeleprompterActivity = Intent(this, MainTeleprompterActivity::class.java)
+            if (it) {
+                val intentMainTeleprompterActivity =
+                    Intent(this, MainTeleprompterActivity::class.java)
                 startActivity(intentMainTeleprompterActivity)
             }
         })
 
         viewModel.isChangingEmailText.observe(this, {
-            if(it){
+            if (it) {
                 binding.textViewEmailError.visibility = View.INVISIBLE
             }
         })
 
         viewModel.isChangingPasswordText.observe(this, {
-            if(it){
+            if (it) {
                 binding.textViewPasswordError.visibility = View.INVISIBLE
             }
         })

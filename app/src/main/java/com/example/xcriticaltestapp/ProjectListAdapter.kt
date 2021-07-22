@@ -7,11 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ProjectListAdapter(private val projectItemsList: ArrayList<ProjectListItem>) : RecyclerView.Adapter<ProjectListAdapter.ProjectListHolder>() {
+class ProjectListAdapter(private val projectItemsList: ArrayList<ProjectListItem>) :
+    RecyclerView.Adapter<ProjectListAdapter.ProjectListHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectListHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recycler_list_item,
-        parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.recycler_list_item,
+            parent, false
+        )
 
         return ProjectListHolder(itemView)
     }
@@ -31,7 +34,7 @@ class ProjectListAdapter(private val projectItemsList: ArrayList<ProjectListItem
         notifyItemRemoved(position)
     }
 
-    fun addProjectItem(position: Int, projectItem: ProjectListItem){
+    fun addProjectItem(position: Int, projectItem: ProjectListItem) {
         projectItemsList.add(position, projectItem)
         notifyItemInserted(position)
     }

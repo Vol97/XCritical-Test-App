@@ -11,8 +11,8 @@ import com.example.xcriticaltestapp.databinding.ActivityRecoverPasswordBinding
 
 class RecoverPasswordActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityRecoverPasswordBinding
-    private lateinit var viewModel : MainViewModel
+    private lateinit var binding: ActivityRecoverPasswordBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,13 +24,13 @@ class RecoverPasswordActivity : AppCompatActivity() {
         binding.mainViewModel = viewModel
 
         viewModel.isInvalidLiveDataEmail.observe(this, {
-            if(it) {
+            if (it) {
                 binding.textViewEmailError.visibility = View.VISIBLE
             }
         })
 
         viewModel.isChangingEmailText.observe(this, {
-            if(it){
+            if (it) {
                 binding.textViewEmailError.visibility = View.INVISIBLE
             }
         })

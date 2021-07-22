@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
+
         <variable
             name="mainViewModel"
             type="com.example.xcriticaltestapp.MainViewModel" />
     </data>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,13 +27,13 @@
             android:id="@+id/logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.10"
-            app:layout_constraintWidth_percent="0.25"
             android:contentDescription="@string/logo_description"
             app:layout_constraintBottom_toTopOf="@+id/guideline_top"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
             app:srcCompat="@drawable/ic_frame" />
 
         <LinearLayout
@@ -74,11 +74,11 @@
                     android:gravity="start"
                     android:hint="@string/email_hint"
                     android:inputType="textEmailAddress"
+                    android:onTextChanged="@{mainViewModel.onEmailTextChanged}"
                     android:singleLine="false"
                     android:textColor="@color/grey_300"
                     android:textColorHint="@color/deep_purple_400"
-                    android:textSize="14sp"
-                    android:onTextChanged="@{mainViewModel.onEmailTextChanged}"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textViewEmailError"
@@ -117,10 +117,10 @@
                     android:gravity="start"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
+                    android:onTextChanged="@{mainViewModel.onPasswordTextChanged}"
                     android:textColor="@color/grey_300"
                     android:textColorHint="@color/deep_purple_400"
-                    android:textSize="14sp"
-                    android:onTextChanged="@{mainViewModel.onPasswordTextChanged}" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/textViewPasswordError"
@@ -166,10 +166,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/button_round_corners_light_purple"
+                    android:onClick="@{() -> mainViewModel.validateLogin(editTextEmailAddress.getText().toString(), editTextPassword.getText().toString())}"
                     android:text="@string/button_login"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:onClick="@{() -> mainViewModel.validateLogin(editTextEmailAddress.getText().toString(), editTextPassword.getText().toString())}"/>
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/buttonRegister"
@@ -178,7 +178,7 @@
                     android:background="@drawable/button_round_corners_dark_purple"
                     android:text="@string/button_registration"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 

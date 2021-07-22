@@ -31,18 +31,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isChangingPasswordText: LiveData<Boolean>
         get() = _isChangingPasswordText
 
-    fun onEmailTextChanged(s: CharSequence,start: Int,before : Int, count :Int){
+    fun onEmailTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         _isChangingEmailText.value = true
     }
 
-    fun onPasswordTextChanged(s: CharSequence,start: Int,before : Int, count :Int){
+    fun onPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         _isChangingPasswordText.value = true
     }
 
     /**
      * General validation of [email] and [password] for login
      */
-    fun validateLogin(email: String?, password: String?){
+    fun validateLogin(email: String?, password: String?) {
         val mail = validateEmail(email)
         val pass = validatePassword(password)
 
@@ -55,7 +55,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * @return Boolean true if email is invalid
      */
     fun validateEmail(email: String?): Boolean? {
-        _isInvalidLiveDataEmail.value = email.isNullOrEmpty() || !EMAIL_ADDRESS_PATTERN.matcher(email).matches()
+        _isInvalidLiveDataEmail.value =
+            email.isNullOrEmpty() || !EMAIL_ADDRESS_PATTERN.matcher(email).matches()
         return _isInvalidLiveDataEmail.value
     }
 
