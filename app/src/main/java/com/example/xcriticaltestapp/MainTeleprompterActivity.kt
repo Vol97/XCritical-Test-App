@@ -56,8 +56,7 @@ class MainTeleprompterActivity : AppCompatActivity() {
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
-
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     private fun initializeListeners() {
