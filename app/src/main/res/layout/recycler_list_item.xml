@@ -7,9 +7,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:background="@drawable/project_list_item_background"
-        android:elevation="5dp"
-        android:layout_margin="10dp">
+        android:elevation="5dp">
 
         <TextView
             android:id="@+id/textViewProjectName"
@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:text="Project name"
-            android:textSize="20sp"
             android:textColor="@color/app_indigo_900"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,11 +39,11 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
+            android:contentDescription="@string/mobile_icon_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewProjectText"
-            app:srcCompat="@drawable/ic_mobile"
-            android:contentDescription="@string/mobile_icon_description" />
+            app:srcCompat="@drawable/ic_mobile" />
 
         <TextView
             android:id="@+id/textViewProjectDate"
