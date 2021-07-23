@@ -6,8 +6,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.xcriticaltestapp.generated.callback.OnClickListener
 
-class ProjectListAdapter(private val projectItemsList: ArrayList<ProjectListItem>) :
+class ProjectListAdapter(
+    private val projectItemsList: ArrayList<ProjectListItem>,
+    private val listener: OnItemClickListener
+) :
     RecyclerView.Adapter<ProjectListAdapter.ProjectListHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectListHolder {
@@ -39,9 +43,26 @@ class ProjectListAdapter(private val projectItemsList: ArrayList<ProjectListItem
         notifyItemInserted(position)
     }
 
-    class ProjectListHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ProjectListHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         val imageView: ImageView = itemView.findViewById(R.id.imageViewMobileIcon)
         val projectName: TextView = itemView.findViewById(R.id.textViewProjectName)
         val projectText: TextView = itemView.findViewById(R.id.textViewProjectText)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = absoluteAdapterPosition
+
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 }

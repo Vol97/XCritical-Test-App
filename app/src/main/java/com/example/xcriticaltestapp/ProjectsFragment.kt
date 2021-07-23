@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcriticaltestapp.databinding.FragmentProjectsBinding
 
-class ProjectsFragment : Fragment() {
+class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
     private var _binding: FragmentProjectsBinding? = null
     private val binding get() = _binding!!
@@ -40,7 +43,7 @@ class ProjectsFragment : Fragment() {
         testList.add(ProjectListItem(R.drawable.ic_mobile, "name10", "text10"))
         testList.add(ProjectListItem(R.drawable.ic_mobile, "name11", "text11"))
 
-        val projectListAdapter = ProjectListAdapter(testList)
+        val projectListAdapter = ProjectListAdapter(testList, this)
 
         binding.recyclerViewProjects.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -56,6 +59,10 @@ class ProjectsFragment : Fragment() {
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewProjects)
+    }
+
+    override fun onItemClick(position: Int) {
+        findNavController().navigate(R.id.createProjectFragment)
     }
 
     override fun onDestroyView() {
