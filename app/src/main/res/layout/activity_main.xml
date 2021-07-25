@@ -74,7 +74,7 @@
                     android:gravity="start"
                     android:hint="@string/email_hint"
                     android:inputType="textEmailAddress"
-                    android:onTextChanged="@{mainViewModel.onEmailTextChanged}"
+                    android:onTextChanged="@{mainViewModel::onEmailTextChanged}"
                     android:singleLine="false"
                     android:textColor="@color/grey_300"
                     android:textColorHint="@color/deep_purple_400"
@@ -117,7 +117,7 @@
                     android:gravity="start"
                     android:hint="@string/password_hint"
                     android:inputType="textPassword"
-                    android:onTextChanged="@{mainViewModel.onPasswordTextChanged}"
+                    android:onTextChanged="@{mainViewModel::onPasswordTextChanged}"
                     android:textColor="@color/grey_300"
                     android:textColorHint="@color/deep_purple_400"
                     android:textSize="14sp" />
