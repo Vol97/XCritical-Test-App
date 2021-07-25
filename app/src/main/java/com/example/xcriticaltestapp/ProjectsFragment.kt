@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcriticaltestapp.databinding.FragmentProjectsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
     private var _binding: FragmentProjectsBinding? = null

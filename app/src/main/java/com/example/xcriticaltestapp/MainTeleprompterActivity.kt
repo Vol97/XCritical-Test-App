@@ -12,7 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.xcriticaltestapp.databinding.ActivityMainTeleprompterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainTeleprompterActivity : AppCompatActivity() {
 
     private lateinit var toggle: ActionBarDrawerToggle
