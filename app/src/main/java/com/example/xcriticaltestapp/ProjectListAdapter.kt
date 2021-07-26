@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xcriticaltestapp.generated.callback.OnClickListener
 
 class ProjectListAdapter(
-    private val projectItemsList: ArrayList<ProjectListItem>,
+    private var projectItemsList: ArrayList<ProjectListItem>,
     private val listener: OnItemClickListener
 ) :
     RecyclerView.Adapter<ProjectListAdapter.ProjectListHolder>() {
@@ -29,6 +28,7 @@ class ProjectListAdapter(
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.projectName.text = currentItem.projectName
         holder.projectText.text = currentItem.projectText
+        holder.projectDate.text = currentItem.projectDate
     }
 
     override fun getItemCount() = projectItemsList.size
@@ -43,11 +43,17 @@ class ProjectListAdapter(
         notifyItemInserted(position)
     }
 
+    fun setProjects(projectList: ArrayList<ProjectListItem>){
+        projectItemsList = projectList
+        notifyDataSetChanged()
+    }
+
     inner class ProjectListHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val imageView: ImageView = itemView.findViewById(R.id.imageViewMobileIcon)
         val projectName: TextView = itemView.findViewById(R.id.textViewProjectName)
         val projectText: TextView = itemView.findViewById(R.id.textViewProjectText)
+        val projectDate: TextView = itemView.findViewById(R.id.textViewProjectDate)
 
         init {
             itemView.setOnClickListener(this)

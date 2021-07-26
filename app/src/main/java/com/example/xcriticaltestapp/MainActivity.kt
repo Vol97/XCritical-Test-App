@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         binding.mainViewModel = viewModel
 
         viewModel.isInvalidLiveDataEmail.observe(this, {
