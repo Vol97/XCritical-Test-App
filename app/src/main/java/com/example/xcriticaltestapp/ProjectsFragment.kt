@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,32 +34,28 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val projectListAdapter =
-            viewModel.getAllProjects().value?.let { ProjectListAdapter(it, this) }
+        val projectListAdapter = ProjectListAdapter(viewModel.getAllProjects(), this)
 
-        viewModel.getAllProjects().observe(viewLifecycleOwner, {
-            projectListAdapter?.setProjects(it)
+        binding.recyclerViewProjects.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = projectListAdapter
+            setHasFixedSize(true)
+        }
 
-            binding.recyclerViewProjects.apply {
-                layoutManager = LinearLayoutManager(activity)
-                adapter = projectListAdapter
-                setHasFixedSize(true)
+        val swipeHandler = object : SwipeToDeleteCallback(context) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.removeProject(
+                    projectListAdapter.deleteProjectItem(viewHolder.absoluteAdapterPosition)
+                )
             }
+        }
 
-            val swipeHandler = object : SwipeToDeleteCallback(context) {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    projectListAdapter?.deleteProjectItem(viewHolder.absoluteAdapterPosition)
-                }
-            }
-
-            val itemTouchHelper = ItemTouchHelper(swipeHandler)
-            itemTouchHelper.attachToRecyclerView(binding.recyclerViewProjects)
-            
-        })
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerViewProjects)
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.createProjectFragment)
+        findNavController().navigate(R.id.action_projectsFragment_to_createProjectFragment)
     }
 
     override fun onDestroyView() {

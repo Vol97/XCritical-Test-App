@@ -14,7 +14,11 @@
         android:id="@+id/galleryFragment"
         android:name="com.example.xcriticaltestapp.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_createProjectFragment"
+            app:destination="@id/createProjectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/projectsFragment"
         android:name="com.example.xcriticaltestapp.ProjectsFragment"
@@ -22,6 +26,8 @@
         tools:layout="@layout/fragment_projects" >
         <action
             android:id="@+id/action_projectsFragment_to_createProjectFragment"
-            app:destination="@id/createProjectFragment" />
+            app:destination="@id/createProjectFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 </navigation>

@@ -5,9 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class ProjectListAdapter(
+class ProjectListAdapter @Inject constructor(
     private var projectItemsList: ArrayList<ProjectListItem>,
     private val listener: OnItemClickListener
 ) :
@@ -33,9 +36,11 @@ class ProjectListAdapter(
 
     override fun getItemCount() = projectItemsList.size
 
-    fun deleteProjectItem(position: Int) {
+    fun deleteProjectItem(position: Int): ProjectListItem {
+        val deletedItem = projectItemsList[position]
         projectItemsList.removeAt(position)
         notifyItemRemoved(position)
+        return deletedItem
     }
 
     fun addProjectItem(position: Int, projectItem: ProjectListItem) {
