@@ -1,19 +1,25 @@
 package com.example.xcriticaltestapp
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
+class MainViewModel @Inject constructor(
+    private val projectsRepository: ProjectsRepository
+) : ViewModel() {
 
     private val EMAIL_ADDRESS_PATTERN = Pattern.compile(
         "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)])"
     )
+
+    private val _allProjects = projectsRepository.getProjectsList()
+
     private val _isInvalidLiveDataEmail = MutableLiveData<Boolean>()
     val isInvalidLiveDataEmail: LiveData<Boolean>
         get() = _isInvalidLiveDataEmail
@@ -41,6 +47,16 @@ class MainViewModel @Inject constructor(application: Application) : AndroidViewM
     fun onPasswordTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         _isChangingPasswordText.value = true
     }
+
+    fun addProject(project: ProjectListItem){
+        projectsRepository.addProject(project)
+    }
+
+    fun removeProject(project: ProjectListItem){
+        projectsRepository.removeProject(project)
+    }
+
+    fun getAllProjects() = _allProjects
 
     /**
      * General validation of [email] and [password] for login

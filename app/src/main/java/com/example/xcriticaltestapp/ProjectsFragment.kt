@@ -1,12 +1,14 @@
 package com.example.xcriticaltestapp
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,11 +21,12 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
     private var _binding: FragmentProjectsBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentProjectsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -31,21 +34,7 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val testList = ArrayList<ProjectListItem>()
-
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name1", "text1"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name2", "text2"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name3", "text3"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name4", "text4"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name5", "text5"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name6", "text6"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name7", "text7"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name8", "text8"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name9", "text9"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name10", "text10"))
-        testList.add(ProjectListItem(R.drawable.ic_mobile, "name11", "text11"))
-
-        val projectListAdapter = ProjectListAdapter(testList, this)
+        val projectListAdapter = ProjectListAdapter(viewModel.getAllProjects(), this)
 
         binding.recyclerViewProjects.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -55,7 +44,9 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
         val swipeHandler = object : SwipeToDeleteCallback(context) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                projectListAdapter.deleteProjectItem(viewHolder.absoluteAdapterPosition)
+                viewModel.removeProject(
+                    projectListAdapter.deleteProjectItem(viewHolder.absoluteAdapterPosition)
+                )
             }
         }
 
@@ -64,7 +55,7 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        findNavController().navigate(R.id.createProjectFragment)
+        findNavController().navigate(R.id.action_projectsFragment_to_createProjectFragment)
     }
 
     override fun onDestroyView() {

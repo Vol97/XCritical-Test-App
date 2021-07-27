@@ -5,11 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.example.xcriticaltestapp.generated.callback.OnClickListener
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class ProjectListAdapter(
-    private val projectItemsList: ArrayList<ProjectListItem>,
+class ProjectListAdapter @Inject constructor(
+    private var projectItemsList: ArrayList<ProjectListItem>,
     private val listener: OnItemClickListener
 ) :
     RecyclerView.Adapter<ProjectListAdapter.ProjectListHolder>() {
@@ -29,13 +31,16 @@ class ProjectListAdapter(
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.projectName.text = currentItem.projectName
         holder.projectText.text = currentItem.projectText
+        holder.projectDate.text = currentItem.projectDate
     }
 
     override fun getItemCount() = projectItemsList.size
 
-    fun deleteProjectItem(position: Int) {
+    fun deleteProjectItem(position: Int): ProjectListItem {
+        val deletedItem = projectItemsList[position]
         projectItemsList.removeAt(position)
         notifyItemRemoved(position)
+        return deletedItem
     }
 
     fun addProjectItem(position: Int, projectItem: ProjectListItem) {
@@ -43,11 +48,17 @@ class ProjectListAdapter(
         notifyItemInserted(position)
     }
 
+    fun setProjects(projectList: ArrayList<ProjectListItem>){
+        projectItemsList = projectList
+        notifyDataSetChanged()
+    }
+
     inner class ProjectListHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val imageView: ImageView = itemView.findViewById(R.id.imageViewMobileIcon)
         val projectName: TextView = itemView.findViewById(R.id.textViewProjectName)
         val projectText: TextView = itemView.findViewById(R.id.textViewProjectText)
+        val projectDate: TextView = itemView.findViewById(R.id.textViewProjectDate)
 
         init {
             itemView.setOnClickListener(this)

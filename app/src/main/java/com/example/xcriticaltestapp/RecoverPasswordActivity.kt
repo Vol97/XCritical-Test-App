@@ -23,7 +23,8 @@ class RecoverPasswordActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        supportActionBar?.hide()
+
         binding.mainViewModel = viewModel
 
         viewModel.isInvalidLiveDataEmail.observe(this, {
