@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,6 +14,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.xcriticaltestapp.databinding.ActivityMainTeleprompterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +26,8 @@ class MainTeleprompterActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityMainTeleprompterBinding
     private lateinit var navigationController: NavController
+    private var isLinear = true
+    private val recycler by lazy { findViewById<RecyclerView>(R.id.recyclerViewProjects) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +65,17 @@ class MainTeleprompterActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)) {
             return true
+        }
+        when (item.itemId) {
+            R.id.showAsGrid -> {
+                if (isLinear) {
+                    recycler.layoutManager = LinearLayoutManager(this)
+                    isLinear = false
+                } else {
+                    recycler.layoutManager = GridLayoutManager(this, 2)
+                    isLinear = true
+                }
+            }
         }
         return true
     }
