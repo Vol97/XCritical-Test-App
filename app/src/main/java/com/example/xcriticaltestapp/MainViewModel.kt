@@ -1,7 +1,5 @@
 package com.example.xcriticaltestapp
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -48,11 +46,11 @@ class MainViewModel @Inject constructor(
         _isChangingPasswordText.value = true
     }
 
-    fun addProject(project: ProjectListItem){
+    fun addProject(project: ProjectListItem) {
         projectsRepository.addProject(project)
     }
 
-    fun removeProject(project: ProjectListItem){
+    fun removeProject(project: ProjectListItem) {
         projectsRepository.removeProject(project)
     }
 

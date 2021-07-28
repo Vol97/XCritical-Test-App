@@ -4,25 +4,30 @@ import android.app.ActionBar
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.example.xcriticaltestapp.databinding.FragmentCreateProjectBinding
+import com.example.xcriticaltestapp.databinding.FragmentProjectsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class CreateProjectFragment : Fragment() {
 
-    private lateinit var actionBar : ActionBar
+    private var _binding: FragmentCreateProjectBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_create_project, container, false)
+        _binding = FragmentCreateProjectBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
-        inflater.inflate(R.menu.create_project_fragment_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

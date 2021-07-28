@@ -69,10 +69,10 @@ class MainTeleprompterActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.showAsGrid -> {
                 if (isLinear) {
-                    recycler.layoutManager = LinearLayoutManager(this)
+                    recycler.layoutManager = GridLayoutManager(this, 2)
                     isLinear = false
                 } else {
-                    recycler.layoutManager = GridLayoutManager(this, 2)
+                    recycler.layoutManager = LinearLayoutManager(this)
                     isLinear = true
                 }
             }
@@ -109,6 +109,20 @@ class MainTeleprompterActivity : AppCompatActivity() {
                 ).show()
             }
             true
+        }
+
+        navigationController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.createProjectFragment -> {
+                    supportActionBar?.hide()
+                }
+                R.id.projectsFragment -> {
+                    supportActionBar?.show()
+                }
+                R.id.galleryFragment -> {
+                    supportActionBar?.hide()
+                }
+            }
         }
     }
 }
