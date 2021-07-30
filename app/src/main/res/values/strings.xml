@@ -18,6 +18,9 @@
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
     <string name="fab_description">Create new project</string>
+    <string name="save_project">Сохранить</string>
+    <string name="header">Заголовок</string>
+    <string name="scenario_body">Текст сценария</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

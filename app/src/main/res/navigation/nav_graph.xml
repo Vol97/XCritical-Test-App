@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/createProjectFragment"
-        android:name="com.example.xcriticaltestapp.CreateProjectFragment"
+        android:name="com.example.xcriticaltestapp.fragments.CreateProjectFragment"
         android:label="fragment_create_project"
         tools:layout="@layout/fragment_create_project" />
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.xcriticaltestapp.GalleryFragment"
+        android:name="com.example.xcriticaltestapp.fragments.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"
-        android:name="com.example.xcriticaltestapp.ProjectsFragment"
+        android:name="com.example.xcriticaltestapp.fragments.ProjectsFragment"
         android:label="fragment_projects"
         tools:layout="@layout/fragment_projects" >
         <action

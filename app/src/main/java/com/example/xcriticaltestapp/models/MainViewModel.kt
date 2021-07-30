@@ -1,8 +1,10 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.models
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.xcriticaltestapp.ProjectListItem
+import com.example.xcriticaltestapp.ProjectsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.regex.Pattern
 import javax.inject.Inject

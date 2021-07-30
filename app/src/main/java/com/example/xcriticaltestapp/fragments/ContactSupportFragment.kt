@@ -1,20 +1,23 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.xcriticaltestapp.R
 
-@AndroidEntryPoint
-class GalleryFragment : Fragment() {
+class ContactSupportFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gallery, container, false)
+        return inflater.inflate(R.layout.fragment_contact_support, container, false)
     }
 }
