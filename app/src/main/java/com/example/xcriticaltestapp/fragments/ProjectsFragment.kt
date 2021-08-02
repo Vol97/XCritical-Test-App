@@ -17,12 +17,10 @@ import com.example.xcriticaltestapp.R
 import com.example.xcriticaltestapp.SwipeToDeleteCallback
 import com.example.xcriticaltestapp.databinding.FragmentProjectsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
-    private var projectPosition by Delegates.notNull<Int>()
     private var _binding: FragmentProjectsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by viewModels()
@@ -70,20 +68,5 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun updateProject() {
-        if (this.arguments != null) {
-            val args = this.arguments
-            projectPosition = args?.get("projectPosition") as Int
-            val projectName = args.get("projectName") as String
-            val projectText = args.get("projectText") as String
-            val projectDate = args.get("projectDate") as String
-
-            val projectToUpdate = recyclerViewAdapter.getProject(projectPosition)
-            projectToUpdate.projectName = projectName
-            projectToUpdate.projectText = projectText
-            projectToUpdate.projectDate = projectDate
-        }
     }
 }
