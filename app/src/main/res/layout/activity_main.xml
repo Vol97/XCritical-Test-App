@@ -7,14 +7,14 @@
 
         <variable
             name="mainViewModel"
-            type="com.example.xcriticaltestapp.MainViewModel" />
+            type="com.example.xcriticaltestapp.models.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_black_900"
-        tools:context=".MainActivity">
+        tools:context=".activities.MainActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_top"

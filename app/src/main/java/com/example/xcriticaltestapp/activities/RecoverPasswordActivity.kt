@@ -1,13 +1,10 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import com.example.xcriticaltestapp.models.MainViewModel
 import com.example.xcriticaltestapp.databinding.ActivityRecoverPasswordBinding
 import dagger.hilt.android.AndroidEntryPoint
 

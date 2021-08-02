@@ -1,13 +1,13 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.xcriticaltestapp.ProjectListItem
+import com.example.xcriticaltestapp.R
 import javax.inject.Inject
 
 class ProjectListAdapter @Inject constructor(
@@ -52,6 +52,8 @@ class ProjectListAdapter @Inject constructor(
         projectItemsList = projectList
         notifyDataSetChanged()
     }
+
+    fun getProject(position: Int) = projectItemsList[position]
 
     inner class ProjectListHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {

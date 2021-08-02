@@ -1,7 +1,7 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.example.xcriticaltestapp.ProjectListItem
+import com.example.xcriticaltestapp.R
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.collections.ArrayList

@@ -1,14 +1,13 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import com.example.xcriticaltestapp.models.MainViewModel
 import com.example.xcriticaltestapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

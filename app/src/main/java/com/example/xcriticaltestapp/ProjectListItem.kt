@@ -4,7 +4,7 @@ import java.time.LocalDate
 
 data class ProjectListItem(
     val imageResource: Int,
-    val projectName: String,
-    val projectText: String,
-    val projectDate: String
+    var projectName: String,
+    var projectText: String,
+    var projectDate: String
 )

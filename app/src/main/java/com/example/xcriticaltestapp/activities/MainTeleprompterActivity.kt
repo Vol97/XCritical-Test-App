@@ -1,4 +1,4 @@
-package com.example.xcriticaltestapp
+package com.example.xcriticaltestapp.activities
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -6,13 +6,17 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.xcriticaltestapp.R
 import com.example.xcriticaltestapp.databinding.ActivityMainTeleprompterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +26,9 @@ class MainTeleprompterActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityMainTeleprompterBinding
     private lateinit var navigationController: NavController
+    private var isLinear = true
+    private val recycler by lazy { findViewById<RecyclerView>(R.id.recyclerViewProjects) }
+    private lateinit var drawer: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +38,7 @@ class MainTeleprompterActivity : AppCompatActivity() {
 
         navigationController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavigationView.setupWithNavController(navigationController)
+        drawer = findViewById(R.id.drawerLayout)
 
         toggle = ActionBarDrawerToggle(
             this,
@@ -60,6 +68,17 @@ class MainTeleprompterActivity : AppCompatActivity() {
         if (toggle.onOptionsItemSelected(item)) {
             return true
         }
+        when (item.itemId) {
+            R.id.showAsGrid -> {
+                if (isLinear) {
+                    recycler.layoutManager = GridLayoutManager(this, 2)
+                    isLinear = false
+                } else {
+                    recycler.layoutManager = LinearLayoutManager(this)
+                    isLinear = true
+                }
+            }
+        }
         return true
     }
 
@@ -70,28 +89,42 @@ class MainTeleprompterActivity : AppCompatActivity() {
 
         binding.drawerMenuNavView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.aboutApp -> Toast.makeText(
-                    applicationContext,
-                    "Clicked info", Toast.LENGTH_LONG
-                ).show()
-                R.id.contactSupport -> Toast.makeText(
-                    applicationContext,
-                    "Clicked support", Toast.LENGTH_LONG
-                ).show()
-                R.id.notifications -> Toast.makeText(
-                    applicationContext,
-                    "Clicked notifications", Toast.LENGTH_LONG
-                ).show()
-                R.id.settings -> Toast.makeText(
-                    applicationContext,
-                    "Clicked settings", Toast.LENGTH_LONG
-                ).show()
-                R.id.exit -> Toast.makeText(
-                    applicationContext,
-                    "Clicked exit", Toast.LENGTH_LONG
-                ).show()
+                R.id.aboutApp -> {
+                    drawer.closeDrawer(GravityCompat.START)
+                    navigationController.navigate(R.id.aboutAppFragment)
+                }
+                R.id.contactSupport -> {
+                    drawer.closeDrawer(GravityCompat.START)
+                    navigationController.navigate(R.id.contactSupportFragment)
+                }
+                R.id.notifications -> {
+                    drawer.closeDrawer(GravityCompat.START)
+                    navigationController.navigate(R.id.notificationsFragment)
+                }
+                R.id.settings -> {
+                    drawer.closeDrawer(GravityCompat.START)
+                    navigationController.navigate(R.id.settingsFragment)
+                }
+                R.id.exit -> {
+                    drawer.closeDrawer(GravityCompat.START)
+                    Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show()
+                }
             }
             true
+        }
+
+        navigationController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.createProjectFragment -> {
+                    supportActionBar?.hide()
+                }
+                R.id.projectsFragment -> {
+                    supportActionBar?.show()
+                }
+                R.id.galleryFragment -> {
+                    supportActionBar?.hide()
+                }
+            }
         }
     }
 }

@@ -7,12 +7,16 @@
 
     <fragment
         android:id="@+id/createProjectFragment"
-        android:name="com.example.xcriticaltestapp.CreateProjectFragment"
+        android:name="com.example.xcriticaltestapp.fragments.CreateProjectFragment"
         android:label="fragment_create_project"
-        tools:layout="@layout/fragment_create_project" />
+        tools:layout="@layout/fragment_create_project" >
+        <action
+            android:id="@+id/action_createProjectFragment_to_projectsFragment"
+            app:destination="@id/projectsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.xcriticaltestapp.GalleryFragment"
+        android:name="com.example.xcriticaltestapp.fragments.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -21,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/projectsFragment"
-        android:name="com.example.xcriticaltestapp.ProjectsFragment"
+        android:name="com.example.xcriticaltestapp.fragments.ProjectsFragment"
         android:label="fragment_projects"
         tools:layout="@layout/fragment_projects" >
         <action
@@ -29,5 +33,37 @@
             app:destination="@id/createProjectFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_projectsFragment_to_aboutAppFragment"
+            app:destination="@id/aboutAppFragment" />
+        <action
+            android:id="@+id/action_projectsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_projectsFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_projectsFragment_to_contactSupportFragment"
+            app:destination="@id/contactSupportFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.example.xcriticaltestapp.fragments.AboutAppFragment"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
+    <fragment
+        android:id="@+id/contactSupportFragment"
+        android:name="com.example.xcriticaltestapp.fragments.ContactSupportFragment"
+        android:label="fragment_contact_support"
+        tools:layout="@layout/fragment_contact_support" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.xcriticaltestapp.fragments.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.xcriticaltestapp.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
