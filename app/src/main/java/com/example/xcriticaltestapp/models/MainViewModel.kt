@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.xcriticaltestapp.ProjectListItem
-import com.example.xcriticaltestapp.ProjectsRepository
+import com.example.xcriticaltestapp.repositories.ProjectsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.regex.Pattern
 import javax.inject.Inject

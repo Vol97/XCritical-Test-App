@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/layout/activity_main_teleprompter.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/layout/fragment_about_app.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/layout/fragment_contact_support.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/layout/fragment_notifications.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/layout/fragment_settings.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/layout/recycler_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidProjects/XCriticalTestApp/app/src/main/res/menu/side_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
