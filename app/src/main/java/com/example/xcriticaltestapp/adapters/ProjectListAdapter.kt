@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.xcriticaltestapp.ProjectListItem
 import com.example.xcriticaltestapp.R
+import com.example.xcriticaltestapp.dataBase.entities.ProjectEntity
 import javax.inject.Inject
 
 class ProjectListAdapter @Inject constructor(
-    private var projectItemsList: ArrayList<ProjectListItem>,
+    private var projectItemsList: ArrayList<ProjectEntity>,
     private val listener: OnItemClickListener
 ) :
     RecyclerView.Adapter<ProjectListAdapter.ProjectListHolder>() {
@@ -28,27 +29,26 @@ class ProjectListAdapter @Inject constructor(
     override fun onBindViewHolder(holder: ProjectListHolder, position: Int) {
         val currentItem = projectItemsList[position]
 
-        holder.imageView.setImageResource(currentItem.imageResource)
-        holder.projectName.text = currentItem.projectName
-        holder.projectText.text = currentItem.projectText
-        holder.projectDate.text = currentItem.projectDate
+        holder.projectName.text = currentItem.title
+        holder.projectText.text = currentItem.scenario
+        holder.projectDate.text = currentItem.date
     }
 
     override fun getItemCount() = projectItemsList.size
 
-    fun deleteProjectItem(position: Int): ProjectListItem {
+    fun deleteProjectItem(position: Int): ProjectEntity {
         val deletedItem = projectItemsList[position]
         projectItemsList.removeAt(position)
         notifyItemRemoved(position)
         return deletedItem
     }
 
-    fun addProjectItem(position: Int, projectItem: ProjectListItem) {
-        projectItemsList.add(position, projectItem)
+    fun addProjectItem(position: Int, project: ProjectEntity) {
+        projectItemsList.add(position, project)
         notifyItemInserted(position)
     }
 
-    fun setProjects(projectList: ArrayList<ProjectListItem>){
+    fun setProjects(projectList: ArrayList<ProjectEntity>){
         projectItemsList = projectList
         notifyDataSetChanged()
     }

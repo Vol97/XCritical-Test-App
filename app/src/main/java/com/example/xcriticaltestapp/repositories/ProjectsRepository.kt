@@ -2,59 +2,18 @@ package com.example.xcriticaltestapp.repositories
 
 import com.example.xcriticaltestapp.ProjectListItem
 import com.example.xcriticaltestapp.R
+import com.example.xcriticaltestapp.dataBase.DAO.ProjectDAO
+import com.example.xcriticaltestapp.dataBase.entities.ProjectEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.collections.ArrayList
 
 @Singleton
-class ProjectsRepository @Inject constructor() {
+class ProjectsRepository @Inject constructor(private val projectDAO: ProjectDAO) {
 
-    private val _arrayList: ArrayList<ProjectListItem> = arrayListOf(
-        ProjectListItem(
-            R.drawable.ic_mobile,
-            "name1",
-            "text1",
-            "12.12.2012"
-        ),
-        ProjectListItem(
-            R.drawable.ic_mobile,
-            "name2",
-            "text2",
-            "12.12.2012"
-        ),
-        ProjectListItem(
-            R.drawable.ic_mobile,
-            "name3",
-            "text3",
-            "12.12.2012"
-        ),
-        ProjectListItem(
-            R.drawable.ic_mobile,
-            "name4",
-            "text4",
-            "12.12.2012"
-        ),
-        ProjectListItem(
-            R.drawable.ic_mobile,
-            "name5",
-            "text5",
-            "12.12.2012"
-        ),
-        ProjectListItem(
-            R.drawable.ic_mobile,
-            "name6",
-            "text6",
-            "12.12.2012"
-        )
-    )
+    fun getAllProjects() = projectDAO.getAll()
 
-    fun addProject(project: ProjectListItem) {
-        _arrayList.add(project)
-    }
+    fun addProject(project: ProjectEntity): Long = projectDAO.insertProject(project)
 
-    fun removeProject(project: ProjectListItem) {
-        _arrayList.remove(project)
-    }
-
-    fun getProjectsList() = _arrayList
+    fun removeProject(id: Long) = projectDAO.deleteProject(id)
 }

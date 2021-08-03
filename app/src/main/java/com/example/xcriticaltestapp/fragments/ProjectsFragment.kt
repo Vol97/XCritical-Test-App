@@ -24,7 +24,13 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     private var _binding: FragmentProjectsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by viewModels()
-    private val recyclerViewAdapter by lazy { ProjectListAdapter(viewModel.getAllProjects(), this) }
+    private val recyclerViewAdapter by lazy {
+        viewModel.getAllProjects()?.let {
+            ProjectListAdapter(
+                it, this
+            )
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +51,11 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
         val swipeHandler = object : SwipeToDeleteCallback(context) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                viewModel.removeProject(
-                    recyclerViewAdapter.deleteProjectItem(viewHolder.absoluteAdapterPosition)
-                )
+                recyclerViewAdapter?.deleteProjectItem(viewHolder.absoluteAdapterPosition)?.let {
+                    viewModel.removeProject(
+                        it.projectId
+                    )
+                }
             }
         }
 
@@ -56,11 +64,11 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        val selectedProject = recyclerViewAdapter.getProject(position)
+        val selectedProject = recyclerViewAdapter?.getProject(position)
         val bundle = bundleOf(
             "projectPosition" to position,
-            "projectName" to selectedProject.projectName,
-            "projectText" to selectedProject.projectText
+            "projectName" to (selectedProject?.title ?: "Error"),
+            "projectText" to (selectedProject?.scenario ?: "Error")
         )
         findNavController().navigate(R.id.createProjectFragment, bundle)
     }

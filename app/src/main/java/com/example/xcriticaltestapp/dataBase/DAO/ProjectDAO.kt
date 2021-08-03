@@ -6,7 +6,7 @@ import com.example.xcriticaltestapp.dataBase.entities.ProjectEntity
 @Dao
 interface ProjectDAO {
     @Query("SELECT * FROM projectDb")
-    fun getAll(): List<ProjectEntity>?
+    fun getAll(): ArrayList<ProjectEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProject(project: ProjectEntity): Long
