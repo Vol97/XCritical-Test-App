@@ -36,21 +36,9 @@ class ProjectListAdapter @Inject constructor(
 
     override fun getItemCount() = projectItemsList.size
 
-    fun deleteProjectItem(position: Int): ProjectEntity {
-        val deletedItem = projectItemsList[position]
+    fun deleteProjectItem(position: Int) {
         projectItemsList.removeAt(position)
         notifyItemRemoved(position)
-        return deletedItem
-    }
-
-    fun addProjectItem(position: Int, project: ProjectEntity) {
-        projectItemsList.add(position, project)
-        notifyItemInserted(position)
-    }
-
-    fun setProjects(projectList: ArrayList<ProjectEntity>){
-        projectItemsList = projectList
-        notifyDataSetChanged()
     }
 
     fun getProject(position: Int) = projectItemsList[position]

@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.xcriticaltestapp.ProjectListItem
 import com.example.xcriticaltestapp.R
+import com.example.xcriticaltestapp.dataBase.entities.ProjectEntity
 import com.example.xcriticaltestapp.models.MainViewModel
 import com.example.xcriticaltestapp.databinding.FragmentCreateProjectBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,8 +51,7 @@ class CreateProjectFragment : Fragment() {
             if (this.arguments != null) {
 
             } else {
-                val newProject = ProjectListItem(
-                    R.drawable.ic_mobile,
+                val newProject = ProjectEntity(
                     binding.editTextProjectHeader.text.toString(),
                     binding.editTextScenario.text.toString(),
                     LocalDateTime.now().toString()

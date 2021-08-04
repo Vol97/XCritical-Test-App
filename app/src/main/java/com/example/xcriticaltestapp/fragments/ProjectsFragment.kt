@@ -15,6 +15,7 @@ import com.example.xcriticaltestapp.models.MainViewModel
 import com.example.xcriticaltestapp.adapters.ProjectListAdapter
 import com.example.xcriticaltestapp.R
 import com.example.xcriticaltestapp.SwipeToDeleteCallback
+import com.example.xcriticaltestapp.dataBase.entities.ProjectEntity
 import com.example.xcriticaltestapp.databinding.FragmentProjectsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,7 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
     private val recyclerViewAdapter by lazy {
         viewModel.getAllProjects()?.let {
             ProjectListAdapter(
-                it, this
+                it as ArrayList<ProjectEntity>, this
             )
         }
     }
@@ -51,7 +52,8 @@ class ProjectsFragment : Fragment(), ProjectListAdapter.OnItemClickListener {
 
         val swipeHandler = object : SwipeToDeleteCallback(context) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                recyclerViewAdapter?.deleteProjectItem(viewHolder.absoluteAdapterPosition)?.let {
+                recyclerViewAdapter?.deleteProjectItem(viewHolder.absoluteAdapterPosition)
+                recyclerViewAdapter?.getProject(viewHolder.absoluteAdapterPosition)?.let {
                     viewModel.removeProject(
                         it.projectId
                     )

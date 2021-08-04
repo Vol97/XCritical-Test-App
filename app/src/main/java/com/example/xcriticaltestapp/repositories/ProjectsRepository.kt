@@ -13,7 +13,7 @@ class ProjectsRepository @Inject constructor(private val projectDAO: ProjectDAO)
 
     fun getAllProjects() = projectDAO.getAll()
 
-    fun addProject(project: ProjectEntity): Long = projectDAO.insertProject(project)
+    fun addProject(project: ProjectEntity) = projectDAO.insertProject(project)
 
     fun removeProject(id: Long) = projectDAO.deleteProject(id)
 }
